@@ -1,8 +1,10 @@
 local lpr = game.Players.LocalPlayer
 local camera = game:GetService("Workspace").CurrentCamera
 local worldToViewportPoint = camera.WorldToViewportPoint
+local userInputService = game:GetService("UserInputService")
 
-_G.Teamcheck = false -- La valeur "true" est utilisée pour le contrôle de l'équipe.
+local teamCheckActive = false
+local toggleKey = Enum.KeyCode.E -- Remplacez "E" par la touche souhaitée
 
 -- Fonction permettant de générer des couleurs arc-en-ciel
 local function rainbowColor(frequency)
@@ -86,7 +88,7 @@ local function update()
             local screenPos, onScreen = worldToViewportPoint(camera, rootPart.Position)
             local headPos, headOnScreen = worldToViewportPoint(camera, head.Position)
 
-            if _G.Teamcheck and player.Team == lpr.Team then
+            if teamCheckActive and player.Team == lpr.Team then
                 if playerTracers[player] then playerTracers[player].Visible = false end
                 if playerInfoTexts[player] then playerInfoTexts[player].gui.Enabled = false end
                 if playerHitboxes[player] then playerHitboxes[player].Visible = false end
@@ -172,3 +174,10 @@ end)
 for _, player in pairs(game.Players:GetPlayers()) do
     onPlayerAdded(player)
 end
+
+-- Gestion de l'entrée utilisateur pour le basculement du contrôle d'équipe
+userInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == toggleKey then
+        teamCheckActive = not teamCheckActive
+    end
+end)
