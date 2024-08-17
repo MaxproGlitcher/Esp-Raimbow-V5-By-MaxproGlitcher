@@ -181,3 +181,28 @@ userInputService.InputBegan:Connect(function(input, gameProcessed)
         teamCheckActive = not teamCheckActive
     end
 end)
+
+
+Wait(2)
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+  Title = "ESP Script", 
+  Text = "Script Exercuter", 
+  Icon = "rbxassetid://18940322843",
+  Duration = 15
+})
+
+wait(2)
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+  Title = "Version V6 ", 
+  Text = "ESP V6 Load", 
+  Icon = "rbxassetid://18940557702",
+  Duration = 15
+})
+
+
+wait(1)
+
+-- Notification Pour me contacter au cas problème avec le script cette notification dans la console est crée par moi même!!!
+loadstring(game:HttpGet("https://pastebin.com/raw/3fnaqNVR"))()
